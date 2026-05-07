@@ -91,10 +91,10 @@ function App() {
 
       <nav className="fixed top-0 left-0 right-0 z-40 glass">
         <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-          <div className="flex items-center gap-3">
+          <a href="#home" className="flex items-center gap-3 hover:opacity-80 transition-opacity">
             <img src="/vexorix.tech.png" alt="Vexorix Logo" className="w-8 h-8 md:w-10 md:h-10 object-contain" />
-            <h1 className="text-lg md:text-2xl lg:text-3xl font-bold gradient-text" style={{fontFamily: "'Playfair Display', serif", letterSpacing: '0.05em'}}>Vexorix.Tech</h1>
-          </div>
+            <h1 className="text-lg md:text-2xl lg:text-3xl font-bold gradient-text" style={{fontFamily: "'Playfair Display', serif", letterSpacing: '0.05em'}}>Vexorix.tech</h1>
+          </a>
           <div className="hidden md:flex items-center gap-6 lg:gap-8">
             <a href="#home" className={`transition-colors text-sm lg:text-base ${activeSection === 'home' ? 'text-[#FFD700]' : 'text-gray-300 hover:text-[#FFD700]'}`}>Home</a>
             <a href="#about" className={`transition-colors text-sm lg:text-base ${activeSection === 'about' ? 'text-[#FFD700]' : 'text-gray-300 hover:text-[#FFD700]'}`}>About</a>
@@ -424,7 +424,7 @@ function App() {
        <footer className="py-12 px-6 border-t border-[#1f1f2e]">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
           <div>
-            <h2 className="text-xl md:text-2xl font-bold gradient-text">Vexorix.Tech</h2>
+            <h2 className="text-xl md:text-2xl font-bold gradient-text">Vexorix.tech</h2>
             <p className="text-gray-500 text-sm mt-1">© 2026 Vexorix. All rights reserved.</p>
           </div>
           <div className="flex gap-6">
