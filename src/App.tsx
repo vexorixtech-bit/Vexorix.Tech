@@ -180,12 +180,12 @@ function App() {
           </p>
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div className="reveal-left">
-              <h3 className="text-2xl font-semibold mb-4">Our Mission</h3>
-              <p className="text-gray-400 mb-6">
+              <h3 className="text-2xl font-semibold mb-4 reveal delay-1">Our Mission</h3>
+              <p className="text-gray-400 mb-6 reveal delay-2">
                 To empower businesses with cutting-edge web solutions that drive growth, engagement, and success in the digital landscape.
               </p>
-              <h3 className="text-2xl font-semibold mb-4">What We Do</h3>
-              <ul className="space-y-3 text-gray-400">
+              <h3 className="text-2xl font-semibold mb-4 reveal delay-3">What We Do</h3>
+              <ul className="space-y-3 text-gray-400 reveal delay-4">
                 <li className="flex items-center gap-2"><span className="text-[#FFD700]">✓</span> Custom website development</li>
                 <li className="flex items-center gap-2"><span className="text-[#FFD700]">✓</span> E-commerce solutions</li>
                 <li className="flex items-center gap-2"><span className="text-[#FFD700]">✓</span> Full-stack applications</li>
@@ -193,23 +193,23 @@ function App() {
               </ul>
             </div>
             <div className="glass rounded-2xl p-8 reveal-right">
-              <h3 className="text-2xl font-semibold mb-6">Why Vexorix?</h3>
+              <h3 className="text-2xl font-semibold mb-6 reveal">Why Vexorix?</h3>
               <div className="space-y-4">
-                <div className="flex items-start gap-3">
+                <div className="flex items-start gap-3 reveal delay-1">
                   <span className="text-[#FFD700] text-xl">🚀</span>
                   <div>
                     <h4 className="font-semibold">Fast Delivery</h4>
                     <p className="text-gray-400 text-sm">Quick turnaround without compromising quality</p>
                   </div>
                 </div>
-                <div className="flex items-start gap-3">
+                <div className="flex items-start gap-3 reveal delay-2">
                   <span className="text-[#FFE44D] text-xl">🎨</span>
                   <div>
                     <h4 className="font-semibold">Modern Design</h4>
                     <p className="text-gray-400 text-sm">Pixel-perfect UIs that convert visitors to customers</p>
                   </div>
                 </div>
-                <div className="flex items-start gap-3">
+                <div className="flex items-start gap-3 reveal delay-3">
                   <span className="text-[#FFD700] text-xl">⚡</span>
                   <div>
                     <h4 className="font-semibold">Scalable Solutions</h4>
@@ -261,8 +261,8 @@ function App() {
           </div>
 
           <div className="grid md:grid-cols-2 gap-8">
-            {filteredProjects.map(project => (
-              <div key={project.id} className="glass rounded-2xl overflow-hidden hover-lift group">
+            {filteredProjects.map((project, idx) => (
+              <div key={project.id} className={`glass rounded-2xl overflow-hidden hover-lift group reveal-scale delay-${(idx % 4) + 1}`}>
                 <div className="relative h-64 overflow-hidden">
                   <img src={project.img} alt={project.title} className="w-full h-full object-cover transition-transform group-hover:scale-110" />
                   <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0f] to-transparent"></div>
@@ -289,16 +289,16 @@ function App() {
             Why <span className="gradient-text">Choose Us</span>
           </h2>
           
-          <div className="grid md:grid-cols-3 gap-8 mb-16 reveal">
-            <div className="text-center">
+          <div className="grid md:grid-cols-3 gap-8 mb-16">
+            <div className="text-center reveal delay-1">
               <div className="text-5xl font-bold gradient-text mb-2">{counters.projects}+</div>
               <p className="text-gray-400">Projects Completed</p>
             </div>
-            <div className="text-center">
+            <div className="text-center reveal delay-2">
               <div className="text-5xl font-bold gradient-text mb-2">{counters.clients}+</div>
               <p className="text-gray-400">Happy Clients</p>
             </div>
-            <div className="text-center">
+            <div className="text-center reveal delay-3">
               <div className="text-5xl font-bold gradient-text mb-2">{counters.years}+</div>
               <p className="text-gray-400">Years Experience</p>
             </div>
@@ -306,7 +306,7 @@ function App() {
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 reveal-scale">
             {['Fast Delivery', 'Modern UI', 'Scalable Backend', 'Client Satisfaction'].map((item, idx) => (
-              <div key={idx} className="glass rounded-xl p-6 text-center">
+              <div key={idx} className={`glass rounded-xl p-6 text-center reveal delay-${idx + 1}`}>
                 <div className="w-12 h-12 mx-auto mb-4 rounded-full bg-gradient-to-r from-[#FFD700] to-[#FFE44D] flex items-center justify-center text-2xl">✓</div>
                 <h3 className="font-semibold">{item}</h3>
               </div>
@@ -322,9 +322,9 @@ function App() {
           </h2>
           <p className="text-gray-400 text-center mb-16 reveal">What our clients say about us</p>
 
-          <div className="grid md:grid-cols-3 gap-8 reveal-scale">
+          <div className="grid md:grid-cols-3 gap-8">
             {testimonials.map((testimonial, idx) => (
-              <div key={idx} className="glass rounded-2xl p-6">
+              <div key={idx} className={`glass rounded-2xl p-6 reveal delay-${idx + 1}`}>
                 <div className="flex gap-1 mb-4">
                   {[...Array(testimonial.rating)].map((_, i) => (
                     <span key={i} className="text-yellow-400">★</span>
@@ -348,9 +348,9 @@ function App() {
           </h2>
           <p className="text-gray-400 text-center mb-16 reveal">Choose the plan that fits your needs</p>
 
-          <div className="grid md:grid-cols-3 gap-8 reveal-scale">
+          <div className="grid md:grid-cols-3 gap-8">
             {pricingPlans.map((plan, idx) => (
-              <div key={idx} className={`glass rounded-2xl p-8 relative ${plan.popular ? 'gradient-border' : ''}`}>
+              <div key={idx} className={`glass rounded-2xl p-8 relative reveal delay-${idx + 1} ${plan.popular ? 'gradient-border' : ''}`}>
                 {plan.popular && <span className="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1 bg-gradient-to-r from-[#FFD700] to-[#FFE44D] rounded-full text-xs font-semibold">Most Popular</span>}
                 <h3 className="text-xl font-semibold mb-2">{plan.name}</h3>
                 <p className="text-4xl font-bold gradient-text mb-6">{plan.price}</p>
