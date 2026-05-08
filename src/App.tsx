@@ -394,7 +394,7 @@ function App() {
                   const message = (form.elements.namedItem('message') as HTMLTextAreaElement).value
                   const subject = encodeURIComponent('New Message from ' + name)
                   const body = encodeURIComponent('Name: ' + name + '\nEmail: ' + email + '\n\nMessage:\n' + message)
-                  window.location.href = `mailto:vexorix.tech@gmail.com?subject=${subject}&body=${body}`
+                  window.open(`https://mail.google.com/mail/?view=cm&fs=1&to=vexorix.tech@gmail.com&su=${subject}&body=${body}`, '_blank')
                   setFormSent(true)
                 }}>
                   <div>
@@ -419,7 +419,7 @@ function App() {
               <div>
                 <h3 className="text-xl font-semibold mb-4">Contact Info</h3>
                 <div className="space-y-4 text-gray-400">
-                  <p>📧 vexorix.tech@gmail.com</p>
+                  <a href="mailto:vexorix.tech@gmail.com" className="hover:text-[#FFD700] transition-colors">📧 vexorix.tech@gmail.com</a>
                   <p>📱 +91 9655058949</p>
                   <p>📍 2/544 Anna Nagar, Chennai - 600002</p>
                 </div>
