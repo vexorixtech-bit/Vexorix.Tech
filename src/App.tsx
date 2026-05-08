@@ -83,6 +83,20 @@ function App() {
     return () => clearInterval(interval)
   }, [])
 
+  useEffect(() => {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in-view')
+        }
+      })
+    }, { threshold: 0.1 })
+
+    document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale').forEach(el => observer.observe(el))
+
+    return () => observer.disconnect()
+  }, [])
+
   const filteredProjects = filter === 'All' ? projects : projects.filter(p => p.category === filter)
 
   return (
@@ -156,16 +170,16 @@ function App() {
         </div>
       </section>
 
-      <section id="about" className="py-24 px-6 scroll-mt-20 slide-in-left">
+      <section id="about" className="py-24 px-6 scroll-mt-20 reveal-left">
         <div className="max-w-7xl mx-auto">
-          <h2 className="text-4xl font-bold text-center mb-4">
+          <h2 className="text-4xl font-bold text-center mb-4 reveal">
             About <span className="gradient-text">Vexorix</span>
           </h2>
-          <p className="text-gray-400 text-center mb-16 max-w-3xl mx-auto">
+          <p className="text-gray-400 text-center mb-16 max-w-3xl mx-auto reveal">
             We are a freelance web development agency specializing in building modern, high-converting websites and web applications. With expertise across multiple industries, we deliver tailored digital solutions that help businesses grow their online presence and achieve their goals.
           </p>
           <div className="grid md:grid-cols-2 gap-12 items-center">
-            <div>
+            <div className="reveal-left">
               <h3 className="text-2xl font-semibold mb-4">Our Mission</h3>
               <p className="text-gray-400 mb-6">
                 To empower businesses with cutting-edge web solutions that drive growth, engagement, and success in the digital landscape.
@@ -178,7 +192,7 @@ function App() {
                 <li className="flex items-center gap-2"><span className="text-[#FFD700]">✓</span> UI/UX design</li>
               </ul>
             </div>
-            <div className="glass rounded-2xl p-8">
+            <div className="glass rounded-2xl p-8 reveal-right">
               <h3 className="text-2xl font-semibold mb-6">Why Vexorix?</h3>
               <div className="space-y-4">
                 <div className="flex items-start gap-3">
@@ -208,18 +222,18 @@ function App() {
         </div>
       </section>
 
-      <section id="services" className="py-24 px-6 scroll-mt-20 slide-in-right">
+      <section id="services" className="py-24 px-6 scroll-mt-20 reveal-right">
         <div className="max-w-7xl mx-auto">
-          <h2 className="text-4xl font-bold text-center mb-4">
+          <h2 className="text-4xl font-bold text-center mb-4 reveal">
             Our <span className="gradient-text">Services</span>
           </h2>
-          <p className="text-gray-400 text-center mb-16 max-w-2xl mx-auto">
+          <p className="text-gray-400 text-center mb-16 max-w-2xl mx-auto reveal">
             Comprehensive web solutions tailored to your business needs
           </p>
           
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             {services.map((service, idx) => (
-              <div key={idx} className={`glass rounded-2xl p-6 hover-lift scale-up stagger-${idx + 1}`}>
+              <div key={idx} className={`glass rounded-2xl p-6 hover-lift reveal-scale delay-${idx + 1}`}>
                 <div className="text-4xl mb-4">{service.icon}</div>
                 <h3 className="text-xl font-semibold mb-2">{service.title}</h3>
                 <p className="text-gray-400 text-sm">{service.desc}</p>
@@ -229,16 +243,16 @@ function App() {
         </div>
       </section>
 
-      <section id="portfolio" className="py-24 px-6 bg-[#12121a] scroll-mt-20 fade-in">
+      <section id="portfolio" className="py-24 px-6 bg-[#12121a] scroll-mt-20 reveal">
         <div className="max-w-7xl mx-auto">
-          <h2 className="text-4xl font-bold text-center mb-4">
+          <h2 className="text-4xl font-bold text-center mb-4 reveal">
             Our <span className="gradient-text">Portfolio</span>
           </h2>
-          <p className="text-gray-400 text-center mb-12 max-w-2xl mx-auto">
+          <p className="text-gray-400 text-center mb-12 max-w-2xl mx-auto reveal">
             Showcasing our best work across various industries
           </p>
 
-          <div className="flex gap-4 justify-center mb-12 flex-wrap">
+          <div className="flex gap-4 justify-center mb-12 flex-wrap reveal">
             {['All', 'Business', 'Healthcare', 'E-commerce', 'Portfolio', 'Fitness', 'Events', 'Real Estate'].map(cat => (
               <button key={cat} onClick={() => setFilter(cat)} className={`px-6 py-2 rounded-full transition-all ${filter === cat ? 'bg-gradient-to-r from-[#FFD700] to-[#FFE44D]' : 'glass hover:bg-white/10'}`}>
                 {cat}
@@ -269,13 +283,13 @@ function App() {
         </div>
       </section>
 
-      <section id="why-choose" className="py-24 px-6 scroll-mt-20 slide-in-left">
+      <section id="why-choose" className="py-24 px-6 scroll-mt-20 reveal-left">
         <div className="max-w-7xl mx-auto">
-          <h2 className="text-4xl font-bold text-center mb-16">
+          <h2 className="text-4xl font-bold text-center mb-16 reveal">
             Why <span className="gradient-text">Choose Us</span>
           </h2>
           
-          <div className="grid md:grid-cols-3 gap-8 mb-16">
+          <div className="grid md:grid-cols-3 gap-8 mb-16 reveal">
             <div className="text-center">
               <div className="text-5xl font-bold gradient-text mb-2">{counters.projects}+</div>
               <p className="text-gray-400">Projects Completed</p>
@@ -290,7 +304,7 @@ function App() {
             </div>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 reveal-scale">
             {['Fast Delivery', 'Modern UI', 'Scalable Backend', 'Client Satisfaction'].map((item, idx) => (
               <div key={idx} className="glass rounded-xl p-6 text-center">
                 <div className="w-12 h-12 mx-auto mb-4 rounded-full bg-gradient-to-r from-[#FFD700] to-[#FFE44D] flex items-center justify-center text-2xl">✓</div>
@@ -301,14 +315,14 @@ function App() {
         </div>
       </section>
 
-      <section id="testimonials" className="py-24 px-6 bg-[#12121a] scroll-mt-20 slide-in-right">
+      <section id="testimonials" className="py-24 px-6 bg-[#12121a] scroll-mt-20 reveal-right">
         <div className="max-w-7xl mx-auto">
-          <h2 className="text-4xl font-bold text-center mb-4">
+          <h2 className="text-4xl font-bold text-center mb-4 reveal">
             Client <span className="gradient-text">Testimonials</span>
           </h2>
-          <p className="text-gray-400 text-center mb-16">What our clients say about us</p>
+          <p className="text-gray-400 text-center mb-16 reveal">What our clients say about us</p>
 
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="grid md:grid-cols-3 gap-8 reveal-scale">
             {testimonials.map((testimonial, idx) => (
               <div key={idx} className="glass rounded-2xl p-6">
                 <div className="flex gap-1 mb-4">
@@ -327,14 +341,14 @@ function App() {
         </div>
       </section>
 
-      <section id="pricing" className="py-24 px-6 scroll-mt-20 fade-in">
+      <section id="pricing" className="py-24 px-6 scroll-mt-20 reveal">
         <div className="max-w-7xl mx-auto">
-          <h2 className="text-4xl font-bold text-center mb-4">
+          <h2 className="text-4xl font-bold text-center mb-4 reveal">
             Simple <span className="gradient-text">Pricing</span>
           </h2>
-          <p className="text-gray-400 text-center mb-16">Choose the plan that fits your needs</p>
+          <p className="text-gray-400 text-center mb-16 reveal">Choose the plan that fits your needs</p>
 
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="grid md:grid-cols-3 gap-8 reveal-scale">
             {pricingPlans.map((plan, idx) => (
               <div key={idx} className={`glass rounded-2xl p-8 relative ${plan.popular ? 'gradient-border' : ''}`}>
                 {plan.popular && <span className="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1 bg-gradient-to-r from-[#FFD700] to-[#FFE44D] rounded-full text-xs font-semibold">Most Popular</span>}
@@ -356,15 +370,15 @@ function App() {
         </div>
       </section>
 
-      <section id="contact" className="py-24 px-6 bg-[#12121a] scroll-mt-20 slide-in-left">
+      <section id="contact" className="py-24 px-6 bg-[#12121a] scroll-mt-20 reveal-left">
         <div className="max-w-7xl mx-auto">
-          <h2 className="text-4xl font-bold text-center mb-4">
+          <h2 className="text-4xl font-bold text-center mb-4 reveal">
             Get In <span className="gradient-text">Touch</span>
           </h2>
-          <p className="text-gray-400 text-center mb-16">Let's build something amazing together</p>
+          <p className="text-gray-400 text-center mb-16 reveal">Let's build something amazing together</p>
 
           <div className="grid lg:grid-cols-2 gap-16">
-            <div>
+            <div className="reveal-left">
               {formSent ? (
                 <div className="glass rounded-xl p-8 text-center">
                   <div className="text-5xl mb-4">✓</div>
@@ -401,7 +415,7 @@ function App() {
                 </form>
               )}
             </div>
-            <div className="space-y-8">
+            <div className="space-y-8 reveal-right">
               <div>
                 <h3 className="text-xl font-semibold mb-4">Contact Info</h3>
                 <div className="space-y-4 text-gray-400">
@@ -415,7 +429,7 @@ function App() {
         </div>
       </section>
 
-       <footer className="py-12 px-6 border-t border-[#1f1f2e]">
+       <footer className="py-12 px-6 border-t border-[#1f1f2e] reveal">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
           <div>
             <h2 className="text-xl md:text-2xl font-bold gradient-text">Vexorix.tech</h2>
